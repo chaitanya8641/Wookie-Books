@@ -13,3 +13,4 @@ namespace WookieBooks.Entities
         public string Price { get; set; } = null!;
     }
 }
+
