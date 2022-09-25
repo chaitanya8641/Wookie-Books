@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "3c809eae-1f8f-440f-bf11-9217749a4f5b",
+		"name": "WookieBooks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "https://localhost:7274/api/auth/authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"authToken\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"HGibbs\",\r\n  \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBaseUrl}}/auth/authenticate",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "https://localhost:7274/api/book/getallpublishbooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localBaseUrl}}/book/getallpublishbooks",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"getallpublishbooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7274/api/book/getBooksbyseacrch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localBaseUrl}}/book/getBooksbyseacrch?searchTitle=Test",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"getBooksbyseacrch"
+							],
+							"query": [
+								{
+									"key": "searchTitle",
+									"value": "Test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://localhost:7274/api/book/getbookbyid/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localBaseUrl}}/book/getbookbyid/1",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"getbookbyid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{localBaseUrl}}/book/getbooksbyuserid/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "id",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{localBaseUrl}}/book/getbooksbyuserid/1",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"getbooksbyuserid",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{localBaseUrl}}/book/publishbook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"bookId\": 4,\r\n        \"title\": \"Test4\",\r\n        \"description\": \"Test4\",\r\n        \"author\": \"HG\",\r\n        \"coverImage\": \"Test4\",\r\n        \"price\": \"2\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBaseUrl}}/book/publishbook",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"publishbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{localBaseUrl}}/book/updatepublishbook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"bookId\": 2,\r\n        \"title\": \"Test11111111111111114\",\r\n        \"description\": \"Test111111114\",\r\n        \"author\": \"HG\",\r\n        \"coverImage\": \"Test1111114\",\r\n        \"price\": \"2\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localBaseUrl}}/book/updatepublishedbook",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"updatepublishedbook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{localBaseUrl}}/book/unpublishbook/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localBaseUrl}}/book/unpublishbook/4",
+							"host": [
+								"{{localBaseUrl}}"
+							],
+							"path": [
+								"book",
+								"unpublishbook",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localBaseUrl",
+			"value": "https://localhost:7274/api",
+			"type": "default"
+		}
+	]
+}
